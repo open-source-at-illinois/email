@@ -2,25 +2,15 @@ name: Docker
 
 on:
   push:
-    # Publish `production` and ` tags as releases.
     branches:
       - send
 jobs:
-  # Run tests.
-  # See also https://docs.docker.com/docker-hub/builds/automated-testing/
   test:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
-
-  # Push image to GitHub Packages.
-  # See also https://docs.docker.com/docker-hub/builds/
   send:
-    # Ensure test job passes before pushing image.
-
     runs-on: ubuntu-latest
-
     steps:
       - name: Send email
         run: curl --data "token=${{ secrets.SEND_EMAIL_TOKEN }}" https://triggers.osai-web.com/send-email
